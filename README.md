@@ -104,8 +104,8 @@ to our paper. The results are as follows:
 <table>
     <thead>
         <tr>
-            <th>Dataset</th>
-            <th>Model</th>
+            <th style="white-space:nowrap;">Dataset</th>
+            <th style="white-space:nowrap;">Model</th>
             <th>AP</th>
             <th>AP<sub>0.5</sub></th>
             <th>AP<sub>0.75</sub></th>
