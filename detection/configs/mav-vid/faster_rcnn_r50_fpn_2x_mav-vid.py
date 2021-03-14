@@ -16,17 +16,17 @@ data = dict(
     samples_per_gpu=4,
     workers_per_gpu=2,
     train=dict(
-        img_prefix='data/mav_vid_dataset/images/',
+        img_prefix='data/mav-vid/images/',
         classes=classes,
-        ann_file='data/mav_vid_dataset/train.json'),
+        ann_file='data/mav-vid/train.json'),
     val=dict(
-        img_prefix='data/mav_vid_dataset/images/',
+        img_prefix='data/mav-vid/images/',
         classes=classes,
-        ann_file='data/mav_vid_dataset/val.json'),
+        ann_file='data/mav-vid/val.json'),
     test=dict(
-        img_prefix='data/mav_vid_dataset/images/',
+        img_prefix='data/mav-vid/images/',
         classes=classes,
-        ann_file='data/mav_vid_dataset/val.json'))
+        ann_file='data/mav-vid/val.json'))
 
 load_from = 'checkpoints/faster_rcnn_r50_fpn_2x_coco_bbox_mAP-0.384_20200504_210434-a5d8aa15.pth'
 optimizer = dict(lr=0.001)

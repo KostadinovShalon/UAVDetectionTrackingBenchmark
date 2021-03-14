@@ -6,17 +6,17 @@ data = dict(
     samples_per_gpu=2,
     workers_per_gpu=2,
     train=dict(
-        img_prefix='data/mav_vid_dataset/images/',
+        img_prefix='data/mav-vid/images/',
         classes=classes,
-        ann_file='data/mav_vid_dataset/train.json'),
+        ann_file='data/mav-vid/train.json'),
     val=dict(
-        img_prefix='data/mav_vid_dataset/images/',
+        img_prefix='data/mav-vid/images/',
         classes=classes,
-        ann_file='data/mav_vid_dataset/val.json'),
+        ann_file='data/mav-vid/val.json'),
     test=dict(
-        img_prefix='data/mav_vid_dataset/images/',
+        img_prefix='data/mav-vid/images/',
         classes=classes,
-        ann_file='data/mav_vid_dataset/val.json'))
+        ann_file='data/mav-vid/val.json'))
 
 load_from = 'checkpoints/detr_r50_8x2_150e_coco_20201130_194835-2c4b8974.pth'
 
