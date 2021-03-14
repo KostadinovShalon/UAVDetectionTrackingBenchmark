@@ -172,8 +172,228 @@ to our paper. The results are as follows:
             <td>0.661</td>
             <td>0.742</td>
         </tr>
+        <tr>
+            <td rowspan=4>Drone-vs-Bird</td>
+            <td>Faster RCNN <a href="detection/results/drone-vs-bird/faster_rcnn_r50_fpn_2x_drone-vs-bird_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EeeEOvc39h5IqpDxqKp9kLMBwKe3_cQ3jl4jaDs1zp3nYg">weights</a></td>
+            <td>0.283</td>
+            <td>0.632</td>
+            <td>0.197</td>
+            <td>0.218</td>
+            <td>0.473</td>
+            <td>0.506</td>
+            <td>0.356</td>
+            <td>0.298</td>
+            <td>0.546</td>
+            <td>0.512</td>
+        </tr>
+       <tr>
+            <td>SSD512 <a href="detection/results/drone-vs-bird/ssd512_vgg_2x_drone-vs-bird_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EU4H-yjv5RdOh7IAo9KDMNEB9MAjSVwt6CAGuQv9pi2CZw">weights</a></td>
+            <td>0.629</td>
+            <td>0.134</td>
+            <td>0.199</td>
+            <td>0.422</td>
+            <td>0.052</td>
+            <td>0.379</td>
+            <td>0.327</td>
+            <td>0.549</td>
+            <td>0.556</td>
+        </tr>
+        <tr>
+            <td>YOLOv3 <a href="detection/results/drone-vs-bird/yolov3_d53_608_2x_drone-vs-bird_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/ERk9LTZKUqNLnCTtWP4cxEMB1m-2cerWjlyFj-nXQRhm-A">weights</a></td>
+            <td>0.210</td>
+            <td>0.546</td>
+            <td>0.105</td>
+            <td>0.158</td>
+            <td>0.395</td>
+            <td>0.356</td>
+            <td>0.302</td>
+            <td>0.238</td>
+            <td>0.512</td>
+            <td>0.637</td>
+        </tr>
+        <tr>
+            <td>DETR <a href="detection/results/drone-vs-bird/detr_r50_8x2_2x_drone-vs-bird_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EfIX7XMn7PFJnJqY5ieS2IMB2Z3SQO8cJF0cBGiRmdO0ng">weights</a></td>
+            <td>0.251</td>
+            <td>0.667</td>
+            <td>0.123</td>
+            <td>0.190</td>
+            <td>0.444</td>
+            <td>0.533</td>
+            <td>0.473</td>
+            <td>0.425</td>
+            <td>0.631</td>
+            <td>0.550</td>
+        </tr>
+        <tr>
+            <td rowspan=4>Anti-UAV-Full</td>
+            <td>Faster RCNN <a href="detection/results/anti-uav/faster_rcnn_r50_fpn_2x_anti-uav-full_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EYQRSppnIINHmnStVh7xYX8BVkeis6GBi4owaDpVg4cFFQ">weights</a></td>
+            <td>0.612</td>
+            <td>0.974</td>
+            <td>0.701</td>
+            <td>0.517</td>
+            <td>0.619</td>
+            <td>0.737</td>
+            <td>0.666</td>
+            <td>0.601</td>
+            <td>0.670</td>
+            <td>0.778</td>
+        </tr>
+       <tr>
+            <td>SSD512 <a href="detection/results/anti-uav/ssd512_vgg_2x_anti-uav-full_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/ETZp76kZuL9HjZCgtMGoaD4BB9E39CnH9C3HnJmGDeIpKQ">weights</a></td>
+            <td>0.613</td>
+            <td>0.982</td>
+            <td>0.697</td>
+            <td>0.527</td>
+            <td>0.619</td>
+            <td>0.712</td>
+            <td>0.678</td>
+            <td>0.616</td>
+            <td>0.682</td>
+            <td>0.780</td>
+        </tr>
+        <tr>
+            <td>YOLOv3 <a href="detection/results/anti-uav/yolov3_d53_608_2x_anti-uav-full_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/ERpQdgwe7UxKneWKET6ftzUBjCD2XHzsezid0eB54_9jtQ">weights</a></td>
+            <td>0.604</td>
+            <td>0.977</td>
+            <td>0.676</td>
+            <td>0.529</td>
+            <td>0.619</td>
+            <td>0.708</td>
+            <td>0.667</td>
+            <td>0.618</td>
+            <td>0.668</td>
+            <td>0.760</td>
+        </tr>
+        <tr>
+            <td>DETR <a href="detection/results/anti-uav/detr_r50_8x2_2x_anti-uav-full_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EdYu3mo1b1NGlDpxyC-UdVMBlJlsoT64NDAUTuW9ztCkXA">weights</a></td>
+            <td>0.586</td>
+            <td>0.977</td>
+            <td>0.648</td>
+            <td>0.509</td>
+            <td>0.589</td>
+            <td>0.692</td>
+            <td>0.649</td>
+            <td>0.598</td>
+            <td>0.649</td>
+            <td>0.752</td>
+        </tr>
+        <tr>
+            <td rowspan=4>Anti-UAV-RGB</td>
+            <td>Faster RCNN <a href="detection/results/anti-uav/faster_rcnn_r50_fpn_2x_anti-uav-rgb_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EWCYcJNKVKBAq3k9LwlawlQBNmQzm7SsBnNEofam0__Y4g">weights</a></td>
+            <td>0.642</td>
+            <td>0.982</td>
+            <td>0.770</td>
+            <td>0.134</td>
+            <td>0.615</td>
+            <td>0.718</td>
+            <td>0.694</td>
+            <td>0.135</td>
+            <td>0.677</td>
+            <td>0.760</td>
+        </tr>
+       <tr>
+            <td>SSD512 <a href="detection/results/anti-uav/ssd512_vgg_2x_anti-uav-rgb_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EVzm116b9U1Ok3VKMB7ve8sBMkivRWzzQyVlzFlCwM5vew">weights</a></td>
+            <td>0.627</td>
+            <td>0.979</td>
+            <td>0.747</td>
+            <td>0.124</td>
+            <td>0.593</td>
+            <td>0.718</td>
+            <td>0.703</td>
+            <td>0.156</td>
+            <td>0.682</td>
+            <td>0.785</td>
+        </tr>
+        <tr>
+            <td>YOLOv3 <a href="detection/results/anti-uav/yolov3_d53_608_2x_anti-uav-rgb_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EWRRw0-dRghJigEsoJCiWlMBYvy2Jf662ji5WrPLgKqIsQ">weights</a></td>
+            <td>0.617</td>
+            <td>0.986</td>
+            <td>0.717</td>
+            <td>0.143</td>
+            <td>0.595</td>
+            <td>0.702</td>
+            <td>0.684</td>
+            <td>0.181</td>
+            <td>0.664</td>
+            <td>0.758</td>
+        </tr>
+        <tr>
+            <td>DETR <a href="detection/results/anti-uav/detr_r50_8x2_2x_anti-uav-rgb_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EVJ4puX1pf9CqtSGi503crQBB0I8bpSNSTJDpgSUyRUJUA">weights</a></td>
+            <td>0.628</td>
+            <td>0.978</td>
+            <td>0.740</td>
+            <td>0.129</td>
+            <td>0.590</td>
+            <td>0.734</td>
+            <td>0.700</td>
+            <td>0.144</td>
+            <td>0.675</td>
+            <td>0.794</td>
+        </tr>
+        <tr>
+            <td rowspan=4>Anti-UAV-IR</td>
+            <td>Faster RCNN <a href="detection/results/anti-uav/faster_rcnn_r50_fpn_2x_anti-uav-ir_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EQ_-RlO93z5Osd3uMP_0HUYBCoIHzPcI1grvIZgGeLlNYQ">weights</a></td>
+            <td>0.581</td>
+            <td>0.977</td>
+            <td>0.641</td>
+            <td>0.523</td>
+            <td>0.623</td>
+            <td>-</td>
+            <td>0.636</td>
+            <td>0.602</td>
+            <td>0.663</td>
+            <td>-</td>
+        </tr>
+       <tr>
+            <td>SSD512 <a href="detection/results/anti-uav/ssd512_vgg_2x_anti-uav-ir_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/ESyI-HmkAX1DqFVSN0A-zOgB6eY2_GhTX0EDcQ6UpsOFvw">weights</a></td>
+            <td>0.590</td>
+            <td>0.975</td>
+            <td>0.639</td>
+            <td>0.518</td>
+            <td>0.636</td>
+            <td>-</td>
+            <td>0.649</td>
+            <td>0.609</td>
+            <td>0.681</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>YOLOv3 <a href="detection/results/anti-uav/yolov3_d53_608_2x_anti-uav-ir_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EeDjdqmlMDdOlvSwBbNrEsoB0TznUEqs0jxE_qbK7wIiZw">weights</a></td>
+            <td>0.591</td>
+            <td>0.976</td>
+            <td>0.643</td>
+            <td>0.533</td>
+            <td>0.638</td>
+            <td>-</td>
+            <td>0.651</td>
+            <td>0.620</td>
+            <td>0.675</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>DETR <a href="detection/results/anti-uav/detr_r50_8x2_2x_anti-uav-ir_log.json">log</a> <a href="https://durhamuniversity-my.sharepoint.com/:u:/g/personal/pfvn47_durham_ac_uk/EXdERZmyQ9tBgsAA6vdjScMByif6BHHQjCc5xQ8U2Yoybg">weights</a></td>
+            <td>0.599</td>
+            <td>0.980</td>
+            <td>0.655</td>
+            <td>0.525</td>
+            <td>0.642</td>
+            <td>-</td>
+            <td>0.671</td>
+            <td>0.633</td>
+            <td>0.701</td>
+            <td>-</td>
+        </tr>
     </tbody>
 </table>
 
 
-### Cite
+### Citation
+
+```
+@article{uavbenchmark,
+  title={Unmanned Aerial Vehicle Visual Detection and Tracking using Deep Neural Networks: A Performance Benchmark},
+  author={Isaac-Medina, Brian K. S. and Poyser, Matt and Organisciak, Daniel and Willcocks, Chris G. and Breckon, Toby P. and Shum, Hubert P. H.},
+  journal = {arXiv},
+  year={2021}
+}
+```
