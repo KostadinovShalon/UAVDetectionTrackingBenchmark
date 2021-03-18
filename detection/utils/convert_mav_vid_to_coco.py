@@ -49,6 +49,7 @@ dataset = {
         "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"
     }],
     "images": [],
+    "videos": [],
     "annotations": [],
     "categories": [
         {
@@ -61,13 +62,20 @@ dataset = {
 
 img_id = 1
 ann_id = 1
+video_ids = []
 
 for file in tqdm.tqdm([f for f in os.listdir(root_dir) if f.endswith(".txt")]):
     file_name = file[:-4]
+    video_id, frame_id = file_name.split("_")
+    if video_id not in video_ids:
+        video_ids.append(video_id)
+        dataset["videos"].append({"name": video_id, "id": video_id})
     image = {
         "id": img_id,
         "file_name": file_name + ".jpg",
-        "license": 1
+        "license": 1,
+        "video_id": video_id,
+        "frame_id": int(frame_id)
     }
     with open(os.path.join(root_dir, file_name + ".shape"), 'r') as shape:
         line = shape.readline()

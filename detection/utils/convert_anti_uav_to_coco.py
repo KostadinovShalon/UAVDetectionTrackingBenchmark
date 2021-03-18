@@ -69,6 +69,7 @@ def extract_images_and_annotations(video_dir_list, out_name_prefix):
             "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"
         }],
         "images": [],
+        "videos": [],
         "annotations": [],
         "categories": [
             {
@@ -82,8 +83,15 @@ def extract_images_and_annotations(video_dir_list, out_name_prefix):
     dataset_IR = copy.deepcopy(dataset)
     dataset_RGB = copy.deepcopy(dataset)
 
+    vid_count = 0
+    vid_ir_count = 0
+    vid_rgb_count = 0
     for vid_dir in tqdm.tqdm(video_dir_list):
+        # if vid_count > 2:
+        #     print(len(dataset["videos"]), len(dataset_IR["videos"]), len(dataset_RGB["videos"]))
+        #     break
         for vid in [f for f in os.listdir(os.path.join(root_dir, vid_dir)) if f.endswith(allowed_videos)]:
+            dataset["videos"].append({"name": f"{vid_dir}_{vid[:-4]}", "id": vid_count})
             vidcap = cv2.VideoCapture(os.path.join(root_dir, vid_dir, vid))
 
             annotations_file_path = f"{vid[:-4]}_label.json"
@@ -92,6 +100,13 @@ def extract_images_and_annotations(video_dir_list, out_name_prefix):
 
             is_ir = vid[:-4] == "IR"
             is_rgb = vid[:-4] == "RGB"
+            if is_ir:
+                dataset_IR["videos"].append({"name": f"{vid_dir}_{vid[:-4]}", "id": vid_ir_count})
+                vid_ir_count += 1
+            else:
+                dataset_RGB["videos"].append({"name": f"{vid_dir}_{vid[:-4]}", "id": vid_rgb_count})
+                vid_rgb_count += 1
+
 
             hasFrames = True
             count = 0
@@ -105,13 +120,33 @@ def extract_images_and_annotations(video_dir_list, out_name_prefix):
                         "file_name": file_name,
                         "license": 1,
                         "width": int(width),
-                        "height": int(height)
+                        "height": int(height),
+                        "video_id": vid_count,
+                        "frame_id": count
                     }
                     dataset["images"].append(img)
                     if is_ir:
-                        dataset_IR["images"].append(img)
+                        img_ir = {
+                            "id": img_id,
+                            "file_name": file_name,
+                            "license": 1,
+                            "width": int(width),
+                            "height": int(height),
+                            "video_id": vid_ir_count,
+                            "frame_id": count
+                        }
+                        dataset_IR["images"].append(img_ir)
                     if is_rgb:
-                        dataset_RGB["images"].append(img)
+                        img_rgb = {
+                            "id": img_id,
+                            "file_name": file_name,
+                            "license": 1,
+                            "width": int(width),
+                            "height": int(height),
+                            "video_id": vid_rgb_count,
+                            "frame_id": count
+                        }
+                        dataset_RGB["images"].append(img_rgb)
 
                     bbox = annotations[count]
                     if len(bbox) == 4 and sum(bbox) > 0:
@@ -123,7 +158,8 @@ def extract_images_and_annotations(video_dir_list, out_name_prefix):
                             "segmentation": [],
                             "area": w * h,
                             "bbox": [int(x), int(y), int(w), int(h)],
-                            "iscrowd": 0
+                            "iscrowd": 0,
+                            "instance_id": 0
                         }
                         dataset["annotations"].append(annotation)
                         if is_ir:
@@ -132,13 +168,14 @@ def extract_images_and_annotations(video_dir_list, out_name_prefix):
                             dataset_RGB["annotations"].append(annotation)
                         ann_id += 1
                     if create_images:
-                        cv2.imwrite(os.path.join(out_dir, "images/", file_name), image)
+                        cv2.imwrite(os.path.join(out_dir, file_name), image)
                     count += 1
                     img_id += 1
+            vid_count += 1
     json.dump(dataset, open(os.path.join(out_dir, f"{out_name_prefix}-full.json"), 'w'))
     json.dump(dataset_IR, open(os.path.join(out_dir, f"{out_name_prefix}-ir.json"), 'w'))
     json.dump(dataset_RGB, open(os.path.join(out_dir, f"{out_name_prefix}-rgb.json"), 'w'))
 
 
-extract_images_and_annotations(video_dirs[:int(total_videos * 0.8)], "train")
-extract_images_and_annotations(video_dirs[int(total_videos * 0.8):], "val")
+extract_images_and_annotations(video_dirs[:int(total_videos * 0.8)], "anti-uav")
+extract_images_and_annotations(video_dirs[int(total_videos * 0.8):], "anti-uav-test")

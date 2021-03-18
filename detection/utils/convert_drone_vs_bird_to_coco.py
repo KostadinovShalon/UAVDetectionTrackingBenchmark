@@ -63,6 +63,32 @@ train_dataset = {
         "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"
     }],
     "images": [],
+    "videos": [],
+    "annotations": [],
+    "categories": [
+        {
+            "id": 1,
+            "name": "drone",
+            "supercategory": "UAV"
+        }
+    ]
+}
+
+test_dataset = {
+    "info": {
+        "year": 2020,
+        "version": 1,
+        "description": "Drove-vs-bird 2020 Challenge dataset",
+        "url": "https://wosdetc2020.wordpress.com/drone-vs-bird-detection-challenge/",
+        "date_created": "2021-01-18"
+    },
+    "licenses": [{
+        "id": 1,
+        "name": "GPL 2",
+        "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"
+    }],
+    "images": [],
+    "videos": [],
     "annotations": [],
     "categories": [
         {
@@ -77,15 +103,30 @@ test_dataset = copy.deepcopy(train_dataset)
 
 _files = [f for f in os.listdir(annotations_dir) if f.endswith(".txt")]
 total_images = [f for f in os.listdir(images_dir) if f.endswith(".jpg")]
-random.shuffle(_files)
-train_last_idx = int(0.8*len(_files))
+
+# random.shuffle(_files)
+# assume images are in order eg vid_0_0, vid_0_1, ... vid_0_-1, vid_1_0, vid_1_1, vid_1_-1, ...., vid_-1_0, vid_-1_1,...vid_-1_-1
+allowed_videos = (".mp4", ".mpg", "avi")
+vids = [f for f in os.listdir(root_dir) if f.endswith(allowed_videos)]
+train_vid_last_idx = int(0.8*len(vids))
+last_vid_idx_name = vids[train_vid_last_idx]
+# train_last_idx = total_images.index(last_vid_idx_name)
+train_last_idx = [id for id, m in enumerate(total_images) if last_vid_idx_name[:-4] in m][0]
+
+# train_last_idx = int(0.8*len(_files))
 train_files = _files[:train_last_idx]
 test_files = _files[train_last_idx:]
+video_id = 0
+video_names = []
 
 for dataset, files, output_name in ((train_dataset, train_files, "train.json"), (test_dataset, test_files, "val.json")):
     img_id = 1
     ann_id = 1
     for file in tqdm.tqdm(files):
+        if file[:-4] not in video_names:
+            video_names.append(file[:-4])
+            dataset["videos"].append({"name": file[:-4], "id": video_id})
+            video_id += 1
         with open(os.path.join(annotations_dir, file), 'r') as f:
             lines = f.readlines()
         for line in lines:
@@ -94,16 +135,19 @@ for dataset, files, output_name in ((train_dataset, train_files, "train.json"), 
             if file_name not in total_images:
                 break
             obs = int(anns[1])
-            if obs == 0:
-                continue
+            # if obs == 0:
+            #     continue
             im = Image.open(os.path.join(images_dir, file_name))
             W, H = im.size
+            vid_id = [id for id, _name in enumerate(video_names) if _name == file[:-4]][0]
             image = {
                 "id": img_id,
                 "file_name": file_name,
                 "license": 1,
                 "width": int(W),
-                "height": int(H)
+                "height": int(H),
+                "video_id": vid_id, # lookup id based off its name
+                "frame_id": int(anns[0])
             }
             dataset["images"].append(image)
             for i in range(obs):
@@ -116,9 +160,11 @@ for dataset, files, output_name in ((train_dataset, train_files, "train.json"), 
                     "segmentation": [],
                     "area": w * h,
                     "bbox": [x, y, w, h],
-                    "iscrowd": 0
+                    "iscrowd": 0,
+                    "instance_id": 0
                 }
                 dataset["annotations"].append(annotation)
                 ann_id += 1
             img_id += 1
-    json.dump(dataset, open(os.path.join(out_dir, output_name), 'w'))
+
+    json.dump(dataset, open(os.path.join(root_dir, output_name), 'w'))
