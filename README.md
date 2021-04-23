@@ -10,6 +10,13 @@ The repository is organized as follows:
  - **detection** (dir): This directory contains the configuration files for detection, the log files and some scripts
  used for setting up the detection dataset.
 
+### Prerequisites
+- PyTorch 1.7.1
+- OpenCV 4.5
+- MMCV 1.2.4
+- MMDet 2.8.0
+- MMTrack 0.5.1
+
 ### Installation
 
 Detection and tracking was carried using the OpenMMLab frameworks for each task. In this section, we give a summary
