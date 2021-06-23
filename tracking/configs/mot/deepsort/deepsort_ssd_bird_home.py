@@ -1,6 +1,6 @@
 _base_ = [
     '../../_base_/models/deep_ssd_base.py',
-    '../../_base_/datasets/mavvid_ncc.py',
+    '../../_base_/datasets/drone_vs_bird_home.py',
     '../../_base_/drone_runtime.py'
 ]
 model = dict(
@@ -8,7 +8,7 @@ model = dict(
     pretrains=dict(
         detector=  # noqa: E251
         # 'C:\\Users\\Matt\\Documents\\PhD\\drone\\mmtracking\\configs\\mot\\deepsort\\faster.pth', # noqa: E501
-        "/home2/lgfm95/drone/Strig-UAV-Project/MAV-VID/SSD512/latest.pth",
+        "/hdd/PhD/drone/Strig-UAV-Project/drone-vs-bird/SSD/latest.pth",
         reid=  # noqa: E251
         'https://download.openmmlab.com/mmtracking/mot/reid/tracktor_reid_r50_iter25245-a452f51f.pth'  # noqa: E501
     ))

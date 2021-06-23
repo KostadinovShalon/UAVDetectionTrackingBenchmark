@@ -1,41 +1,29 @@
 _base_ = [
-    '../../_base_/models/faster_rcnn_r50_fpn.py',
+    '../../_base_/models/ssd300.py',
     '../../_base_/datasets/mot_challenge.py', '../../_base_/default_runtime.py'
 ]
-dataset_type = 'CocoVideoDataset'
-classes = ('drone',)
-...
-data = dict(
-    samples_per_gpu=2,
-    workers_per_gpu=2,
-    train=dict(
-        type=dataset_type,
-        classes=classes,
-        ann_file='data/multirotor-aerial-vehicle-vid-mavvid-dataset/mav_vid_dataset/train/annotations.json',
-        img_prefix='data/multirotor-aerial-vehicle-vid-mavvid-dataset/mav_vid_dataset/train/img/'
-        # ann_file='data/strig-drones/datasets/mav-vid/train_annotations.json',
-        ),
-    test=dict(
-        type=dataset_type,
-        classes=classes,
-        ann_file='data/multirotor-aerial-vehicle-vid-mavvid-dataset/mav_vid_dataset/val/annotations.json',
-        # ann_file='data/strig-drones/datasets/mav-vid/val_annotations.json',
-        img_prefix='data/multirotor-aerial-vehicle-vid-mavvid-dataset/mav_vid_dataset/val/img/'
-        ))
+input_size = 512
 model = dict(
     type='DeepSORT',
     pretrains=dict(
         detector=  # noqa: E251
         'https://download.openmmlab.com/mmtracking/mot/faster_rcnn/faster-rcnn_r50_fpn_4e_mot17-half-64ee2ed4.pth',  # noqa: E501
-        reid=  # noqa: E251
-        'https://download.openmmlab.com/mmtracking/mot/reid/tracktor_reid_r50_iter25245-a452f51f.pth'  # noqa: E501
+        reid= 'https://download.openmmlab.com/mmtracking/mot/reid/tracktor_reid_r50_iter25245-a452f51f.pth'  # noqa: E501
     ),
     detector=dict(
-        rpn_head=dict(bbox_coder=dict(clip_border=False)),
-        roi_head=dict(
-            bbox_head=dict(bbox_coder=dict(
-                clip_border=False), num_classes=1))),
-    # motion=dict(type='CondiFilter', center_only=False),
+        backbone=dict(input_size=input_size),
+        bbox_head=dict(
+            in_channels=(512, 1024, 512, 256, 256, 256, 256),
+        num_classes=1,
+        anchor_generator=dict(
+            type='SSDAnchorGenerator',
+            scale_major=False,
+            input_size=input_size,
+            basesize_ratio_range=(0.1, 0.9),
+            strides=[8, 16, 32, 64, 128, 256, 512],
+            ratios=[[2], [2, 3], [2, 3], [2, 3], [2, 3], [2], [2]]),
+        bbox_coder=dict(clip_border=False)
+            )),
     motion=dict(type='KalmanFilter', center_only=False),
     reid=dict(
         type='BaseReID',
@@ -55,7 +43,6 @@ model = dict(
             norm_cfg=dict(type='BN1d'),
             act_cfg=dict(type='ReLU'))),
     tracker=dict(
-        # type='CondiTracker',
         type='SortTracker',
         obj_score_thr=0.5,
         reid=dict(

@@ -1,13 +1,13 @@
 _base_ = [
     '../../_base_/models/deep_detr_base.py',
-    '../../_base_/datasets/drone_vs_bird_ncc.py',
+    '../../_base_/datasets/antiuav_ir_ncc.py',
     '../../_base_/drone_runtime.py'
 ]
 model = dict(
     type='DeepSORT',
     pretrains=dict(
         detector=  # noqa: E251
-        "/home2/lgfm95/drone/Strig-UAV-Project/bird-vs-drone/DETR/latest.pth",
+        "/home2/lgfm95/drone/Strig-UAV-Project/anti-uav/DETR/ir/latest.pth",
         reid=  # noqa: E251
         'https://download.openmmlab.com/mmtracking/mot/reid/tracktor_reid_r50_iter25245-a452f51f.pth'  # noqa: E501
     ))

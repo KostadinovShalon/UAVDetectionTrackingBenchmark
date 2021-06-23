@@ -1,6 +1,6 @@
 _base_ = [
-    '../../_base_/models/deep_ssd_base.py',
-    '../../_base_/datasets/mavvid_ncc.py',
+    '../../_base_/models/sort_ssd_base.py',
+    '../../_base_/datasets/antiuav_ir_ncc.py',
     '../../_base_/drone_runtime.py'
 ]
 model = dict(
@@ -8,9 +8,9 @@ model = dict(
     pretrains=dict(
         detector=  # noqa: E251
         # 'C:\\Users\\Matt\\Documents\\PhD\\drone\\mmtracking\\configs\\mot\\deepsort\\faster.pth', # noqa: E501
-        "/home2/lgfm95/drone/Strig-UAV-Project/MAV-VID/SSD512/latest.pth",
-        reid=  # noqa: E251
-        'https://download.openmmlab.com/mmtracking/mot/reid/tracktor_reid_r50_iter25245-a452f51f.pth'  # noqa: E501
+        "/home2/lgfm95/drone/Strig-UAV-Project/anti-uav/SSD512/ir/latest.pth",
+        # reid=  # noqa: E251
+        # 'https://download.openmmlab.com/mmtracking/mot/reid/tracktor_reid_r50_iter25245-a452f51f.pth'  # noqa: E501
     ))
 img_norm_cfg = dict(mean=[123.675, 116.28, 103.53], std=[1, 1, 1], to_rgb=True)
 train_pipeline = [
