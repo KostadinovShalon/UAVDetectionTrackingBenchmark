@@ -36,14 +36,12 @@ import random
 from PIL import Image
 import copy
 
-parser = argparse.ArgumentParser(description="Converts Anti-UAV videos to annotations")
-parser.add_argument("--root_dir", type=str, help="Root folder with the dataset videos")
+parser = argparse.ArgumentParser(description="Converts Drone-vs-Bird videos to annotations")
 parser.add_argument("--annotations_dir", type=str, help="Annotations directory")
 parser.add_argument("--images_dir", type=str, help="Images directory")
 parser.add_argument("--out_dir", type=str, help="Output directory to write annotations and images")
 opts = parser.parse_args()
 
-root_dir = opts.root_dir
 annotations_dir = opts.annotations_dir
 images_dir = opts.images_dir
 out_dir = opts.out_dir
@@ -99,23 +97,14 @@ test_dataset = {
     ]
 }
 
-test_dataset = copy.deepcopy(train_dataset)
-
 _files = [f for f in os.listdir(annotations_dir) if f.endswith(".txt")]
 total_images = [f for f in os.listdir(images_dir) if f.endswith(".jpg")]
-
-# random.shuffle(_files)
-# assume images are in order eg vid_0_0, vid_0_1, ... vid_0_-1, vid_1_0, vid_1_1, vid_1_-1, ...., vid_-1_0, vid_-1_1,...vid_-1_-1
-allowed_videos = (".mp4", ".mpg", "avi")
-vids = [f for f in os.listdir(root_dir) if f.endswith(allowed_videos)]
-train_vid_last_idx = int(0.8*len(vids))
-last_vid_idx_name = vids[train_vid_last_idx]
-# train_last_idx = total_images.index(last_vid_idx_name)
-train_last_idx = [id for id, m in enumerate(total_images) if last_vid_idx_name[:-4] in m][0]
-
+random.shuffle(_files)
+train_last_idx = int(0.8*len(_files))
 # train_last_idx = int(0.8*len(_files))
 train_files = _files[:train_last_idx]
 test_files = _files[train_last_idx:]
+
 video_id = 0
 video_names = []
 
@@ -167,4 +156,4 @@ for dataset, files, output_name in ((train_dataset, train_files, "train.json"), 
                 ann_id += 1
             img_id += 1
 
-    json.dump(dataset, open(os.path.join(root_dir, output_name), 'w'))
+    json.dump(dataset, open(os.path.join(out_dir, output_name), 'w'))
