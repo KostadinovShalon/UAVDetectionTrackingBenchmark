@@ -2,6 +2,26 @@ _base_ = [
     '../../_base_/models/faster_rcnn_r50_fpn.py',
     '../../_base_/datasets/mot_challenge.py', '../../_base_/default_runtime.py'
 ]
+dataset_type = 'CocoVideoDataset'
+classes = ('drone',)
+...
+data = dict(
+    samples_per_gpu=2,
+    workers_per_gpu=2,
+    train=dict(
+        type=dataset_type,
+        classes=classes,
+        ann_file='data/multirotor-aerial-vehicle-vid-mavvid-dataset/mav_vid_dataset/train/annotations.json',
+        img_prefix='data/multirotor-aerial-vehicle-vid-mavvid-dataset/mav_vid_dataset/train/img/'
+        # ann_file='data/strig-drones/datasets/mav-vid/train_annotations.json',
+        ),
+    test=dict(
+        type=dataset_type,
+        classes=classes,
+        ann_file='data/multirotor-aerial-vehicle-vid-mavvid-dataset/mav_vid_dataset/val/annotations.json',
+        # ann_file='data/strig-drones/datasets/mav-vid/val_annotations.json',
+        img_prefix='data/multirotor-aerial-vehicle-vid-mavvid-dataset/mav_vid_dataset/val/img/'
+        ))
 model = dict(
     type='DeepSORT',
     pretrains=dict(
@@ -15,6 +35,7 @@ model = dict(
         roi_head=dict(
             bbox_head=dict(bbox_coder=dict(
                 clip_border=False), num_classes=1))),
+    # motion=dict(type='CondiFilter', center_only=False),
     motion=dict(type='KalmanFilter', center_only=False),
     reid=dict(
         type='BaseReID',
@@ -34,6 +55,7 @@ model = dict(
             norm_cfg=dict(type='BN1d'),
             act_cfg=dict(type='ReLU'))),
     tracker=dict(
+        # type='CondiTracker',
         type='SortTracker',
         obj_score_thr=0.5,
         reid=dict(
