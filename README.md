@@ -94,7 +94,7 @@ Dataset object size
 
 Dataset | Size | Average Object Size
 --------|------|---------------------
-**MAV-VID** | *Training*: 53 videos (29,500 images) <br /> *Validation*: 11 videos (10,732 images) | 136 x 77 pxs (0.66% of image size)
+**MAV-VID** | *Training*: 53 videos (29,500 images) <br /> *Validation*: 11 videos (10,732 images) | 215 x 128 pxs (3.28% of image size)
 **Drone-vs-Bird** | *Training*: 61 videos (85,904 images) <br /> *Validation*: 16 videos (18,856 images) | 34 x 23 pxs (0.10% of image size)
 **Anti-UAV** | *Training*: 60 videos (149,478 images) <br /> *Validation*: 140 videos (37,016 images) | *RGB*: 125 x 59 pxs (0.40% image size)<br />*IR*: 52 x 29 pxs (0.50% image size)
 
