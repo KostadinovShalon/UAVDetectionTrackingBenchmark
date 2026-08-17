@@ -57,6 +57,8 @@ Three datasets were in our benchmark. An example of each dataset is shown next, 
 This dataset consists on videos at different setups of single UAV. 
 It contains videos captured from other drones, ground based surveillance cameras and handheld mobile devices.
 It can be downloaded in its [kaggle site](https://www.kaggle.com/alejodosr/multirotor-aerial-vehicle-vid-mavvid-dataset). 
+**Update**: The kaggle site seems to stop working, but the dataset is still available [here](https://bitbucket.org/alejodosr/mav-vid-dataset) (obtained from
+their [github site](https://github.com/alejodosr/adaptive-inattention)).
 
 
 This dataset is composed of images with YOLO annotations divided in two directories: train and val. In order to
